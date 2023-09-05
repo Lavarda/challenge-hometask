@@ -10,11 +10,15 @@
   },
   "scripts": {
     "start": "nodemon ./src/server.js",
-    "seed": "node ./scripts/seedDb.js"
+    "seed": "node ./scripts/seedDb.js",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "concurrently": "^8.0.1",
-    "nodemon": "^2.0.22"
+    "eslint": "^8.48.0",
+    "nodemon": "^2.0.22",
+    "prettier": "^3.0.3"
   },
   "engines": {
     "node": ">=10.16.3"
