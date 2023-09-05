@@ -1,8 +1,27 @@
 const express = require('express')
+const router = express.Router()
+const { Op } = require('sequelize')
 const { getProfile } = require('../middleware/getProfile')
 const Contract = require('../models/Contract')
 
-const router = express.Router()
+/**
+ * @returns all contracts from the profile
+ */
+router.get('/', getProfile, async (req, res) => {
+  const {
+      dataValues: { id: profileId },
+  } = req.profile
+  const contracts = await Contract.findAll({
+      where: {
+          status: {
+              [Op.not]: 'terminated',
+          },
+          [Op.or]: [{ clientId: profileId }, { contractorId: profileId }],
+      },
+  })
+  res.json(contracts)
+})
+
 
 /**
  * @returns contract by id
