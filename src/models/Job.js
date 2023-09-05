@@ -14,6 +14,9 @@ const Job = sequelize.define('Job', {
         type: DataTypes.BOOLEAN,
         default: false,
     },
+    paymentDate: {
+        type: DataTypes.DATE,
+    },
 },
 {
     sequelize,
