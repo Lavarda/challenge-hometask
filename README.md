@@ -1,5 +1,17 @@
 # DEEL BACKEND TASK
 
+## Things I would do if I had more than 3 hours:
+
+- Use some library to validate the request body, like express-validator or joi.
+- Improve the logging, maybe using winston.
+- Improve the error handling in my try/catches using different extensions from the Error class.
+- Improve the architecture using Dependency Injection/Singleton patterns.
+- Split better the code into controllers, services, repositories, use cases etc.
+- Create unit tests, integrations tests and e2e tests.
+- Check if need to implement some lock transactions.
+- Implement cache using Redis.
+- Implement Docker to run the app and database.
+
 💫 Welcome! 🎉
 
 This backend exercise involves building a Node.js/Express.js app that will serve a REST API. We imagine you should spend around 3 hours at implement this feature.
