@@ -11,26 +11,31 @@ const sequelize = require('../database/sequelize')
  * @returns all the jobs that are not paid
  */
 router.get('/unpaid', getProfile, async (req, res) => {
-  const {
-    dataValues: { id: profileId },
-  } = req.profile
-  const jobs = await Job.findAll({
-    where: {
-      paid: {
-        [Op.not]: true,
-      },
-    },
-    include: [
-      {
-        model: Contract,
-        where: {
-          status: 'in_progress',
-          [Op.or]: [{ clientId: profileId }, { contractorId: profileId }],
+  try {
+    const {
+      dataValues: { id: profileId },
+    } = req.profile
+    const jobs = await Job.findAll({
+      where: {
+        paid: {
+          [Op.not]: true,
         },
       },
-    ],
-  })
-  res.json(jobs)
+      include: [
+        {
+          model: Contract,
+          where: {
+            status: 'in_progress',
+            [Op.or]: [{ clientId: profileId }, { contractorId: profileId }],
+          },
+        },
+      ],
+    })
+    res.json(jobs)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Server error' })
+  }
 })
 
 // Pay for a job, a client can only pay if his balance >= the amount to pay. The amount should be moved from the client's balance to the contractor balance.
