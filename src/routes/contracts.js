@@ -9,19 +9,18 @@ const Contract = require('../models/Contract')
  */
 router.get('/', getProfile, async (req, res) => {
   const {
-      dataValues: { id: profileId },
+    dataValues: { id: profileId },
   } = req.profile
   const contracts = await Contract.findAll({
-      where: {
-          status: {
-              [Op.not]: 'terminated',
-          },
-          [Op.or]: [{ clientId: profileId }, { contractorId: profileId }],
+    where: {
+      status: {
+        [Op.not]: 'terminated',
       },
+      [Op.or]: [{ clientId: profileId }, { contractorId: profileId }],
+    },
   })
   res.json(contracts)
 })
-
 
 /**
  * @returns contract by id
@@ -29,14 +28,14 @@ router.get('/', getProfile, async (req, res) => {
 router.get('/:id', getProfile, async (req, res) => {
   const {
     dataValues: { id: profileId },
-} = req.profile
+  } = req.profile
   const { id } = req.params
   const contract = await Contract.findOne({
     where: {
-        id,
-        clientId: profileId,
+      id,
+      clientId: profileId,
     },
-})
+  })
   if (!contract) return res.status(404).end()
   res.json(contract)
 })

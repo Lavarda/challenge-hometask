@@ -1,6 +1,6 @@
-const Contract = require("./Contract")
-const Job = require("./Job")
-const Profile = require("./Profile")
+const Contract = require('./Contract')
+const Job = require('./Job')
+const Profile = require('./Profile')
 
 Profile.hasMany(Contract, { as: 'Contractor', foreignKey: 'ContractorId' })
 Contract.belongsTo(Profile, { as: 'Contractor' })
@@ -10,7 +10,7 @@ Contract.hasMany(Job)
 Job.belongsTo(Contract)
 
 module.exports = {
-    Contract,
-    Job,
-    Profile,
+  Contract,
+  Job,
+  Profile,
 }
